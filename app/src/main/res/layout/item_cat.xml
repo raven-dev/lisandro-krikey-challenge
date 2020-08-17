@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/cv_cat"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="7dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_cat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toTopOf="@+id/tv_see_more"/>
+
+        <TextView
+            android:id="@+id/tv_see_more"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/see_details"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="7dp"
+            android:gravity="center"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

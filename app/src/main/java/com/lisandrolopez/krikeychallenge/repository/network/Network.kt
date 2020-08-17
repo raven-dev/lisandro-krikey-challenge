@@ -1,6 +1,7 @@
 package com.lisandrolopez.krikeychallenge.repository.network
 
 import com.lisandrolopez.krikeychallenge.BuildConfig
+import com.lisandrolopez.krikeychallenge.repository.network.interceptor.NetworkInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,6 +18,7 @@ class Network {
         val clientConfig = OkHttpClient.Builder()
         val client = clientConfig
             .addInterceptor(interceptor)
+            .addNetworkInterceptor(NetworkInterceptor())
             .build()
 
 
@@ -27,5 +29,15 @@ class Network {
             .build()
 
         return retrofit.create(Api::class.java)
+    }
+
+    companion object {
+        private var INSTANCE: Api? = null
+        fun getInstance(): Api {
+            if (INSTANCE == null) {
+                INSTANCE = Network().create()
+            }
+            return INSTANCE!!
+        }
     }
 }
