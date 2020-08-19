@@ -3,4 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_about">About</string>
     <string name="see_details">See details</string>
+    <string name="detail">Detail</string>
+    <string name="breed_description">Breed description:</string>
+    <string name="share">Share</string>
+    <string name="search">Search</string>
+    <string name="empty_cats">No cats found :(</string>
 </resources>

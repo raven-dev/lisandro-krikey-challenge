@@ -21,13 +21,14 @@ class CatListAdapter(private var catList: List<Cat>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cat = catList[position]
+        holder.ivCat.transitionName = cat.url
         GlideApp.with(holder.itemView)
             .load(cat.url)
             .centerCrop()
             .into(holder.ivCat)
 
         holder.container.setOnClickListener {
-            callback.onCatSelected(cat)
+            callback.onCatSelected(holder.ivCat, cat)
         }
     }
 
@@ -37,6 +38,6 @@ class CatListAdapter(private var catList: List<Cat>,
     }
 
     interface OnCatSelectedListener {
-        fun onCatSelected(cat: Cat)
+        fun onCatSelected(imageView: ImageView, cat: Cat)
     }
 }

@@ -9,8 +9,16 @@ import kotlinx.coroutines.Dispatchers
 class CatRepository (private val api: Api) {
 
     suspend fun getKitties(): Resource<List<Cat>?> {
+        return searchKitties(EMPTY)
+    }
+
+    suspend fun searchKitties(query: String): Resource<List<Cat>?> {
         return apiCallHandler(Dispatchers.IO) {
-            api.getKitties()
+            api.getKitties(query)
         }
+    }
+
+    companion object {
+        const val EMPTY = ""
     }
 }
