@@ -13,13 +13,13 @@ Tools/libraries used in this challenge:
 # About project:
 
   - Develop based on MVVM and repository patterns
-  - Dependency injection as "naked way" just to let you know I understand the principle. That's why I didn't add any DI tool like Dagger2, Koin or Hilt.
-  - Making some reactive programming with coroutines and livedata
-  - Single Activity "architecture" (just for fun)
+  - Dependency injection with only Kotlin to show I understand the principle. That's why I didn't add any DI tool like Dagger2, Koin or Hilt.
+  - Used some reactive programming with coroutines and livedata
+  - Single activity / multiple fragment architecture
 
 
 Also:
-  - I using brand new coroutines implementation with retrofit with a centralice Api Handler to handle error about the current call or error from server. I.E: this cclass can handle and parse the error response for te server, so viewmodel or ui doesn't care about how get the error message. Just has to display it.
+  - I using brand new coroutines implementation with retrofit with a central Api Handler to handle error about the current call or error from server. I.E: this class can handle and parse the error response for the server, so ViewModels and Views don't contain logic surrounding error messages. ViewModels and Views can focus on display.
   
 # Resources
 * [Cat list screen] - All cats list
@@ -30,4 +30,4 @@ Also:
    [Cat detail]: <https://www.dropbox.com/s/nasp9okvva2lffd/2.png?dl=0>
    [Share cat image url]: <https://www.dropbox.com/s/7b76hxuas9qvcs1/3.png?dl=0>
 
-At the root of this you will find the builded apk to test it.
+Also included a debug APK at the root for easy testing.
