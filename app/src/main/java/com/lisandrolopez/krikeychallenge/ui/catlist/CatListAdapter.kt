@@ -1,4 +1,4 @@
-package com.lisandrolopez.krikeychallenge.ui.home
+package com.lisandrolopez.krikeychallenge.ui.catlist
 
 import android.view.LayoutInflater
 import android.view.View

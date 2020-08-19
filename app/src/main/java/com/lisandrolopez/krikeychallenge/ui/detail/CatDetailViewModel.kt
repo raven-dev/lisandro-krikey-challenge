@@ -17,7 +17,7 @@ class CatDetailViewModel() : ViewModel() {
         }
     }
 
-    fun getCatImageUrl(): String {
+    private fun getCatImageUrl(): String {
         return cat?.url ?: DEFAULT_CAT_URL
     }
 

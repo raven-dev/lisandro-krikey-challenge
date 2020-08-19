@@ -17,13 +17,13 @@ import com.lisandrolopez.krikeychallenge.R
 import com.lisandrolopez.krikeychallenge.repository.CatRepository
 import com.lisandrolopez.krikeychallenge.repository.network.Network
 import com.lisandrolopez.krikeychallenge.ui.MainActivity
-import com.lisandrolopez.krikeychallenge.ui.home.HomeViewModel
+import com.lisandrolopez.krikeychallenge.ui.catlist.CatListViewModel
 import com.lisandrolopez.krikeychallenge.util.GlideApp
 import kotlinx.android.synthetic.main.fragment_cat_detail.*
 
 class CatDetailFragment : Fragment() {
 
-    private var homeViewModel: HomeViewModel? = null
+    private var homeViewModel: CatListViewModel? = null
     private var detailViewModel: CatDetailViewModel? = null
     private val args: CatDetailFragmentArgs by navArgs()
 
@@ -32,8 +32,8 @@ class CatDetailFragment : Fragment() {
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         activity?.let {
             val catRepo = CatRepository(Network.getInstance())
-            val vmFactory = HomeViewModel.Factory(catRepo)
-            homeViewModel = ViewModelProvider(it, vmFactory).get(HomeViewModel::class.java)
+            val vmFactory = CatListViewModel.Factory(catRepo)
+            homeViewModel = ViewModelProvider(it, vmFactory).get(CatListViewModel::class.java)
 
             detailViewModel = ViewModelProvider(this).get(CatDetailViewModel::class.java)
         }
@@ -61,7 +61,7 @@ class CatDetailFragment : Fragment() {
         }
 
         homeViewModel?.catSelected?.observe(viewLifecycleOwner, Observer {
-            detailViewModel?.cat = it
+            detailViewModel?.setDetailCat(it)
             setCatInfo()
         })
 

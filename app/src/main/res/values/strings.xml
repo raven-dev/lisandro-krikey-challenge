@@ -6,6 +6,6 @@
     <string name="detail">Detail</string>
     <string name="breed_description">Breed description:</string>
     <string name="share">Share</string>
-    <string name="search">Search</string>
+    <string name="search">Search by breed. i.e: pers, beng</string>
     <string name="empty_cats">No cats found :(</string>
 </resources>

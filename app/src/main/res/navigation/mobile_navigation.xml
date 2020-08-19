@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_cat_list">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.lisandrolopez.krikeychallenge.ui.home.HomeFragment"
+        android:id="@+id/navigation_cat_list"
+        android:name="com.lisandrolopez.krikeychallenge.ui.catlist.CatListFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_cat_list" >
         <action
             android:id="@+id/action_navigation_home_to_catDetailFragment"
             app:destination="@id/catDetailFragment" />

@@ -1,4 +1,4 @@
-package com.lisandrolopez.krikeychallenge.ui.home
+package com.lisandrolopez.krikeychallenge.ui.catlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,12 +9,12 @@ import com.lisandrolopez.krikeychallenge.repository.model.Cat
 import com.lisandrolopez.krikeychallenge.repository.network.util.Resource
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val catRepository: CatRepository) : ViewModel() {
+class CatListViewModel(private val catRepository: CatRepository) : ViewModel() {
 
     val catSelected = MutableLiveData<Cat>()
     val kittiesEvent = MutableLiveData<Resource<List<Cat>?>>()
     val isLoadingEvent = MutableLiveData<Boolean>()
-    private var currentSearch: String? = null
+    private var currentSearch: String? = ""
 
     fun getCatList() {
         viewModelScope.launch {
@@ -38,15 +38,15 @@ class HomeViewModel(private val catRepository: CatRepository) : ViewModel() {
         }
     }
 
+    fun catToShow(cat: Cat) {
+        catSelected.value = cat
+    }
+
     class Factory(private val catRepository: CatRepository) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return HomeViewModel(catRepository) as T
+            return CatListViewModel(catRepository) as T
         }
 
-    }
-
-    fun catToShow(cat: Cat) {
-        catSelected.value = cat
     }
 }

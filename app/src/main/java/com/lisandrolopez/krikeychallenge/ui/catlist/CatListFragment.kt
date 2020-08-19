@@ -1,4 +1,4 @@
-package com.lisandrolopez.krikeychallenge.ui.home
+package com.lisandrolopez.krikeychallenge.ui.catlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,19 +19,19 @@ import com.lisandrolopez.krikeychallenge.repository.network.Network
 import com.lisandrolopez.krikeychallenge.repository.network.util.Status
 import com.lisandrolopez.krikeychallenge.util.DebouncingQueryTextListener
 import com.lisandrolopez.krikeychallenge.util.GridMarginDecorator
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_cat_list.*
 
-class HomeFragment : Fragment(), CatListAdapter.OnCatSelectedListener {
+class CatListFragment : Fragment(), CatListAdapter.OnCatSelectedListener {
 
-    private var homeViewModel: HomeViewModel? = null
+    private var catListViewModel: CatListViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.let {
             val catRepo = CatRepository(Network.getInstance())
-            val vmFactory = HomeViewModel.Factory(catRepo)
-            homeViewModel = ViewModelProvider(it, vmFactory).get(HomeViewModel::class.java)
-            homeViewModel?.getCatList()
+            val vmFactory = CatListViewModel.Factory(catRepo)
+            catListViewModel = ViewModelProvider(it, vmFactory).get(CatListViewModel::class.java)
+            catListViewModel?.getCatList()
         }
     }
 
@@ -40,30 +40,30 @@ class HomeFragment : Fragment(), CatListAdapter.OnCatSelectedListener {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_cat_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         str_main.isRefreshing = true
         str_main.setOnRefreshListener {
-            homeViewModel?.getCatList()
+            catListViewModel?.getCatList()
         }
 
         prepareAdapter()
         retrieveCatList()
 
         et_search.addTextChangedListener(DebouncingQueryTextListener(lifecycle) {
-            homeViewModel?.search(it)
+            catListViewModel?.search(it)
         })
 
-        homeViewModel?.isLoadingEvent?.observe(viewLifecycleOwner, Observer {
+        catListViewModel?.isLoadingEvent?.observe(viewLifecycleOwner, Observer {
             str_main.isRefreshing = it
         })
     }
 
     private fun retrieveCatList() {
-        homeViewModel?.kittiesEvent?.observe(viewLifecycleOwner, Observer { result ->
+        catListViewModel?.kittiesEvent?.observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
                 Status.SUCCESS -> {
                     setCats(result.data)
@@ -96,9 +96,9 @@ class HomeFragment : Fragment(), CatListAdapter.OnCatSelectedListener {
     }
 
     override fun onCatSelected(imageView: ImageView, cat: Cat) {
-        homeViewModel?.catToShow(cat)
-        val extras = FragmentNavigatorExtras(imageView to cat.url!!)
-        val action = HomeFragmentDirections.actionNavigationHomeToCatDetailFragment(cat.url ?: "")
+        catListViewModel?.catToShow(cat)
+        val extras = FragmentNavigatorExtras(imageView to (cat.url ?: ""))
+        val action = CatListFragmentDirections.actionNavigationHomeToCatDetailFragment(cat.url ?: "")
 
         findNavController().navigate(action, extras)
 

@@ -32,7 +32,7 @@ import org.junit.runner.RunWith
  */
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class CatDetailFragment {
+class CatDetailFragmentTest {
 
     @Rule
     @JvmField
@@ -55,24 +55,11 @@ class CatDetailFragment {
         )
         appCompatEditText.perform(click())
 
-        val appCompatEditText2 = onView(
-            allOf(
-                withId(R.id.et_search),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.nav_host_fragment),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText2.perform(replaceText("beng"), closeSoftKeyboard())
+        appCompatEditText.perform(replaceText("beng"), closeSoftKeyboard())
 
         //just for demo
         Thread.sleep(5000)
-        appCompatEditText2.perform(closeSoftKeyboard())
+        appCompatEditText.perform(closeSoftKeyboard())
 
         val recyclerView = onView(
             allOf(
@@ -88,7 +75,7 @@ class CatDetailFragment {
         val textView = onView(
             allOf(
                 withId(R.id.tv_description),
-                withText("Bengals are a lot of fun to live with, but they're definitely not the cat for everyone, or for first-time cat owners. Extremely intelligent, curious and active, they demand a lot of interaction and woe betide the owner who doesn't provide it."),
+                withText(BENGAL_DESCRIPTION),
                 childAtPosition(
                     childAtPosition(
                         IsInstanceOf.instanceOf(android.widget.ScrollView::class.java),
@@ -99,7 +86,7 @@ class CatDetailFragment {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Bengals are a lot of fun to live with, but they're definitely not the cat for everyone, or for first-time cat owners. Extremely intelligent, curious and active, they demand a lot of interaction and woe betide the owner who doesn't provide it.")))
+        textView.check(matches(withText(BENGAL_DESCRIPTION)))
     }
 
     private fun childAtPosition(
@@ -118,5 +105,9 @@ class CatDetailFragment {
                         && view == parent.getChildAt(position)
             }
         }
+    }
+
+    companion object {
+        private const val BENGAL_DESCRIPTION = "Bengals are a lot of fun to live with, but they're definitely not the cat for everyone, or for first-time cat owners. Extremely intelligent, curious and active, they demand a lot of interaction and woe betide the owner who doesn't provide it."
     }
 }
